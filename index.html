@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Api WA</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-sm">
+        <h3 class="mt-3 text-center">WA API</h3>
+        <div class="row justify-content-md-center">
+            <div class="card col-md-auto p-0" style="margin-right: 10px;">
+                <div class="card-header">
+                    <h6>Scane QR Code</h6>
+                </div>
+                <div class="card-body">
+                    <label id="label-load">Loading QR Code...</label>
+                    <img src="" class="img-thumbnail" alt="QRCode" id="qrcode">
+                </div>
+            </div>
+
+            <div class="card col-md-auto p-0">
+                <div class="card-header">
+                    <h6>Status Koneksi </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="logs list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="jquery.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="socket.io.min.js"></script>
+<script>
+    $(document).ready(function() {
+        console.log('ready document!');
+        $('#qrcode').hide();
+
+        var socket = io.connect('http://localhost:8000', {
+            path: '/socket.io'
+        });
+
+        socket.on('message', function(msg) {
+            $('.logs').html('');
+            $('.logs').html('<li class="list-group-item">' + msg + '</>');
+        })
+
+        socket.on('qr', function(src) {
+            $('#qrcode').attr('src', src);
+            $('#qrcode').show();
+            $('#label-load').hide();
+        })
+
+        socket.on('ready', function(msg) {
+            $('#qrcode').hide();
+            $('#label-load').text(msg);
+        })
+
+        socket.on('authenticated', function() {
+            $('#qrcode').hide();
+        })
+
+    })
+</script>
+
+</html>

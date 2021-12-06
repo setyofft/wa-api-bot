@@ -1,0 +1,27 @@
+{
+    "name": "wa-api",
+    "version": "1.0.0",
+    "description": "wa api for message personal",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "wa",
+        "api",
+        "PIM"
+    ],
+    "author": "pendekar",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "express-validator": "^6.13.0",
+        "http": "^0.0.1-security",
+        "qrcode": "^1.5.0",
+        "qrcode-terminal": "^0.12.0",
+        "socket.io": "^4.4.0",
+        "wbm": "^1.1.16",
+        "whatsapp-web.js": "^1.15.2"
+    }
+}
