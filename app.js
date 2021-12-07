@@ -161,6 +161,6 @@ app.post('/send-message', [
     }
 })
 
-server.listen(8000, function() {
+server.listen(process.env.PORT || 8000, function() {
     console.log("App running in port 8000");
 })
