@@ -17,6 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/assets'));
 
+app.get('/', (req, res) => {
+    res.redirect('https://wa-api-bot.herokuapp.com/home');
+})
+
 app.get('/home', (req, res) => {
     res.sendFile('index.html', { root: __dirname });
 })
