@@ -66,7 +66,7 @@ io.on('connection', function(socket) {
                 socket.emit("message", "Error generate QR Code !");
             } else {
                 socket.emit("qr", url);
-                socket.emit("message", "QR Code ready");
+                socket.emit("message", "Client is ready scane QR Code !");
             }
         });
     });
