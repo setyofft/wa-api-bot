@@ -122,12 +122,7 @@ app.post('/send-message', [
     body('message').notEmpty()
 ], async(req, res) => {
 
-    if (status_disc == 1) {
-        return res.status(422).json({
-            status: false,
-            message: 'Whatsapp is disconnected!'
-        });
-    } else {
+    if (status_disc == 0) {
         const errors = validationResult(req).formatWith(({ msg }) => {
             return msg;
         })
@@ -162,6 +157,11 @@ app.post('/send-message', [
                 })
             }
         }
+    } else {
+        return res.status(422).json({
+            status: false,
+            message: 'Whatsapp is disconnected!'
+        });
     }
 })
 
